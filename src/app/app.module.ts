@@ -5,15 +5,18 @@ import { RouterModule, Route } from '@angular/router';
 import { AppComponent } from './app.component';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
+import { Page2DetailComponent } from './page2-detail/page2-detail.component';
 
 const routes: Route[] = [
   { path: 'page1', component: Page1Component },
-  { path: 'page2', component: Page2Component },
+  { path: 'page2', component: Page2Component, children: [
+    {path: ':id', component: Page2DetailComponent}
+  ] },
   { path: '**', redirectTo: '/page1', pathMatch: 'full' }
 ];
 
 @NgModule({
-  declarations: [AppComponent, Page1Component, Page2Component],
+  declarations: [AppComponent, Page1Component, Page2Component, Page2DetailComponent],
   imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent]
